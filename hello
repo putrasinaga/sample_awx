@@ -1,7 +1,0 @@
-- name: Say Hello to Putra
-  hosts: localhost
-  gather_facts: no
-  tasks:
-    - name: Print Hello Putra
-      debug:
-        msg: "Hello Putra!"
