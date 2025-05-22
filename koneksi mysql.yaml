@@ -6,6 +6,6 @@
     - name: Cek koneksi MySQL
       mysql_query:
         login_host: 192.168.67.1
-        login_user: awxu
+        login_user: awx
         login_password: awx123
         query: "SHOW DATABASES;"
