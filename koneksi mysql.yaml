@@ -1,6 +1,11 @@
-- name: Test koneksi MySQL
+- name: Tes koneksi dengan Ansible module
   hosts: localhost
+  collections:
+    - community.mysql
   tasks:
-    - name: Tes koneksi
-      shell: |
-        mysql -h 192.168.67.1 -u awx -p'awx123' -e "SHOW DATABASES;"
+    - name: Cek koneksi MySQL
+      mysql_query:
+        login_host: 192.168.67.1
+        login_user: awxu
+        login_password: awx123
+        query: "SHOW DATABASES;"
