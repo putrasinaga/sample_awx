@@ -1,5 +1,6 @@
 - name: Tes koneksi dengan Ansible module
   hosts: localhost
+  gather_facts: false
   collections:
     - community.mysql
   tasks:
@@ -9,3 +10,8 @@
         login_user: awx
         login_password: awx123
         query: "SHOW DATABASES;"
+      register: hasil_query
+
+    - name: Tampilkan hasil query
+      debug:
+        var: hasil_query
