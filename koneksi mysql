@@ -1,0 +1,6 @@
+- name: Test koneksi MySQL
+  hosts: localhost
+  tasks:
+    - name: Tes koneksi
+      shell: |
+        mysql -h 192.168.67.1 -u awx -p'awx123' -e "SHOW DATABASES;"
