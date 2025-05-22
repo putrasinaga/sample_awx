@@ -1,10 +1,11 @@
-- name: Cek collection di EE
+- name: Tampilkan collection yang tersedia
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Cek apakah community.mysql tersedia
-      shell: ansible-galaxy collection list | grep community.mysql
+    - name: Lihat collection yang terinstall
+      shell: ansible-galaxy collection list
       register: hasil
 
-    - debug:
-        var: hasil.stdout
+    - name: Tampilkan hasil
+      debug:
+        var: hasil.stdout_lines
