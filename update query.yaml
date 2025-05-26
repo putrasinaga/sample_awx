@@ -3,6 +3,9 @@
   gather_facts: false
   collections:
     - community.mysql
+  vars:
+    title: ""
+    author_id: ""
   tasks:
     - name: Jalankan query UPDATE
       mysql_query:
@@ -10,7 +13,7 @@
         login_user: awx
         login_password: awx123
         login_db: project
-        query: "UPDATE posts SET title='title1' WHERE author_id=1;"
+        query: "UPDATE posts SET title='{{ title }}' WHERE author_id={{ author_id }};"
       register: hasil_update
 
     - name: Tampilkan hasil update
