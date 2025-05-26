@@ -10,7 +10,7 @@
         login_user: awx
         login_password: awx123
         login_db: project
-        query: "UPDATE project SET title='title1' WHERE author_id=1;"
+        query: "UPDATE posts SET title='title1' WHERE author_id=1;"
       register: hasil_update
 
     - name: Tampilkan hasil update
