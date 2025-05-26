@@ -1,0 +1,18 @@
+- name: Update data di MySQL
+  hosts: localhost
+  gather_facts: false
+  collections:
+    - community.mysql
+  tasks:
+    - name: Jalankan query UPDATE
+      mysql_query:
+        login_host: 192.168.67.1
+        login_user: awx
+        login_password: awx123
+        login_db: project
+        query: "UPDATE project SET title='title1' WHERE author_id=1;"
+      register: hasil_update
+
+    - name: Tampilkan hasil update
+      debug:
+        var: hasil_update
