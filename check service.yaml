@@ -1,6 +1,13 @@
-- name: Show systemctl status mysql
-  command: systemctl status mysql
-  register: mysql_status_output
-  
-- debug:
-    var: mysql_status_output.stdout_lines
+- name: Check MySQL Service Status
+  hosts: localhost # Ganti dengan nama host/grup host yang ingin Anda cek di inventory AWX
+  become: yes # Mungkin diperlukan jika user yang menjalankan Ansible tidak memiliki izin root untuk systemctl
+
+  tasks:
+    - name: Show systemctl status mysql
+      command: systemctl status mysql
+      register: mysql_status_output
+      ignore_errors: yes # Tetap tampilkan output meskipun layanan tidak berjalan
+
+    - name: Display MySQL Status Output
+      debug:
+        var: mysql_status_output.stdout_lines
