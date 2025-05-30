@@ -1,0 +1,31 @@
+- name: Check and restart critical services if stopped
+  hosts: all
+  become: yes
+  vars:
+    services:
+      - mysql
+      - docker
+
+  tasks:
+    - name: Checking service
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        state: started
+      loop: "{{ services }}"
+      register: service_check
+      ignore_errors: yes
+
+    - name: Restart failed services
+      ansible.builtin.systemd:
+        name: "{{ item.item }}"
+        state: restarted
+      when: item.failed
+      loop: "{{ service_check.results }}"
+      register: restart_result
+      ignore_errors: yes
+
+    - name: Report if service still failed after restart
+      ansible.builtin.debug:
+        msg: "Service {{ item.item }} failed and could not be restarted"
+      when: item.failed
+      loop: "{{ restart_result.results }}"
