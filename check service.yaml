@@ -1,5 +1,5 @@
 - name: Check and restart critical services if stopped
-  hosts: all
+  hosts: localhost
   become: yes
   vars:
     services:
