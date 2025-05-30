@@ -1,7 +1,6 @@
 - name: Show systemctl status mysql
   command: systemctl status mysql
   register: mysql_status_output
-  ignore_errors: yes
-
+  
 - debug:
     var: mysql_status_output.stdout_lines
