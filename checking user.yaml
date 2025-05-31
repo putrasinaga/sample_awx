@@ -1,13 +1,7 @@
----
-- name: Get current username on localhost
-  hosts: localhost
-  gather_facts: false # No need to gather facts for this simple task
+- name: Coba jalankan 'which whoami'
+  command: which whoami
+  register: whoami_path
+  ignore_errors: yes
 
-  tasks:
-    - name: Execute 'whoami' command
-      ansible.builtin.command: whoami
-      register: user_info # Store the output in 'user_info' variable
-
-    - name: Display the username
-      ansible.builtin.debug:
-        msg: "The AWX task on {{ inventory_hostname }} is running as user: {{ user_info.stdout | trim }}"
+- debug:
+    msg: "Lokasi whoami: {{ whoami_path.stdout | default('Perintah whoami tidak ditemukan') }}"
