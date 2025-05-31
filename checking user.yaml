@@ -1,7 +1,3 @@
-- name: Coba jalankan 'which whoami'
-  command: which whoami
-  register: whoami_path
-  ignore_errors: yes
-
-- debug:
-    msg: "Lokasi whoami: {{ whoami_path.stdout | default('Perintah whoami tidak ditemukan') }}"
+- name: Execute 'id -un' command
+  command: id -un
+  register: user_info
