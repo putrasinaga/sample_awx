@@ -1,13 +1,13 @@
 ---
-- name: Check current user on localhost
-  hosts: localhost # Menargetkan hanya localhost
-  gather_facts: false # Tidak perlu mengumpulkan fakta, mempercepat eksekusi
+- name: Get current username on localhost
+  hosts: localhost
+  gather_facts: false # No need to gather facts for this simple task
 
   tasks:
-    - name: Get the effective user
+    - name: Execute 'whoami' command
       ansible.builtin.command: whoami
-      register: current_user_info # Menyimpan output perintah ke variabel ini
+      register: user_info # Store the output in 'user_info' variable
 
-    - name: Display the current user
+    - name: Display the username
       ansible.builtin.debug:
-        msg: "The AWX task is being executed by user: {{ current_user_info.stdout }}"
+        msg: "The AWX task on {{ inventory_hostname }} is running as user: {{ user_info.stdout | trim }}"
