@@ -6,7 +6,7 @@
     - name: Show systemctl status mysql
       command: systemctl status mysql
       register: mysql_status_output
-      ignore_errors: yes # Tetap tampilkan output meskipun layanan tidak berjalan
+      ignore_errors: no # Tetap tampilkan output meskipun layanan tidak berjalan
 
     - name: Display MySQL Status Output
       debug:
